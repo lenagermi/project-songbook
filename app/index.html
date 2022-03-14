@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MME</title>
+  <link rel="icon" type="image/x-icon" href="./resources/Icon/favicon-32x32.ico">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.11.0/dist/full.css" rel="stylesheet" type="text/css" />
+  <!--<link rel="stylesheet" href="resources/css/style.css">-->
+</head>
+
+
+<!--Theme-->
+
+<body data-theme="garden" class="bg-secondary">
+  <h1 class=" mb-5 p-6 text-5xl font-bold text-secondary-content text-center">TRACKGUIDE</h1>
+  <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
+    <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+    <div class="flex flex-col items-start drawer-content ">
+      <!-- Songlisten-Template-->
+      <div id="songlist-template" class="place-self-stretch">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box max-w-full">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Songs</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <div class="flex items-stretch">
+                <!--Song-Löschen-Button-->
+                <a id="delete-songs-btn-trash-icon" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                  </svg>
+                </a>
+                <!--Song-hinzufügen-Button-->
+                <a id="add-songs-btn-icon" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                  </svg>
+                </a>
+              </div>
+              <!--Menü-Button-->
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs  text-base-content pl-4">
+            <ul>
+              <li id="songs-breadcrumbs">
+                <a>Songs</a>
+              </li>
+            </ul>
+          </div>
+          <!--Songeintrag in der Songliste-->
+          <div id="songlist">
+            <template id="song-entry" class="px-20">
+              <div id="song-entry-container" class="border rounded-box border-accent-focus bg-accent text-accent-content my-2">
+                <div>
+                  <div id="song-entry-title" class="collapse-title text-xl font-medium">Song 1</div>
+                  <div id="song-entry-information" class="px-4">Songinformation</div>
+                </div>
+                <!--Songinfo-Button-->
+                <div class="flex justify-end">
+                  <a id="info-button" class="btn btn-ghost btn-sm rounded-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+      <!--Ende Songlisten Template-->
+
+      <!--Songeintrag-Template-->
+      <div id="song-entry-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box max-w-full">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Song hinzufügen</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <!--Menü-Button-->
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="songs-breadcrumbs">
+                <a>Songs</a>
+              </li>
+              <li>
+                <a>Song hinzufügen</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="flex p-4 gap-x-4">
+              <div>
+                <!--Eingabefeld Songtitel-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Titel</span>
+                  </label>
+                  <input id="title-input" type="text" placeholder="Titel"
+                    class="input input--accent-focus input-bordered text-base-content">
+                </div>
+                <!--Eingabefeld Interpret-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Interpret</span>
+                  </label>
+                  <input id="interpret-input" type="text" placeholder="Interpret"
+                    class="input input--accent-focus input-bordered text-base-content">
+                </div>
+                <!--Eingabefeld Genre-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Genre</span>
+                  </label>
+                  <input id="genre-input" type="text" placeholder="Jazz"
+                    class="input input-accent-focus input-bordered text-base-content">
+                </div>
+              </div>
+              <div>
+                <!--Eingabefeld Kategorie-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Kategorie</span>
+                  </label>
+                  <input id="category-input" type="text" placeholder="Kategorie"
+                    class="input input-accent-focus input-bordered text-base-content">
+                </div>
+                <div>
+                  <!--Dropdown Beats per Minutes-->
+                  <label class="label">
+                    <span class="label-text">BPM</span>
+                  </label>
+                  <select id="bpm-input" required="required"
+                    class="select select-accent-focus select-bordered w-full max-w-xs text-neutral">
+                    <option disabled="disabled" selected="selected">Wähle Beats per Minute</option>
+                    <option class="font-light">60</option>
+                    <option class="font-light">70</option>
+                    <option class="font-light">80</option>
+                    <option class="font-light">90</option>
+                    <option class="font-light">100</option>
+                    <option class="font-light">110</option>
+                    <option class="font-light">120</option>
+                    <option class="font-light">130</option>
+                    <option class="font-light">140</option>
+                    <option class="font-light">150</option>
+                    <option class="font-light">160</option>
+                    <option class="font-light">170</option>
+                    <option class="font-light">180</option>
+                    <option class="font-light">190</option>
+                    <option class="font-light">200</option>
+                    <option class="font-light">210</option>
+                    <option class="font-light">220</option>
+                    <option class="font-light">230</option>
+                    <option class="font-light">240</option>
+                    <option class="font-light">250</option>
+                    <option class="font-light">260</option>
+                    <option class="font-light">270</option>
+                    <option class="font-light">280</option>
+                    <option class="font-light">290</option>
+                    <option class="font-light">300</option>
+                    <option class="font-light">310</option>
+                    <option class="font-light">320</option>
+                  </select>
+                </div>
+                <!--Eingabefeld Anmerkungen-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Anmerkungen</span>
+                  </label>
+                  <textarea id="comment-input"
+                    class="textarea textarea-accent-focus textarea-bordered text-base-content"
+                    placeholder="Anmerkungen"></textarea>
+                </div>
+              </div>
+              <div>
+                <!--Datei-auswählen-->
+                </br>
+                </br>
+                <div class="form-control px-8">
+                  <input class="text-secondary-content" type="file" id="files">
+                  <div>
+                    </br>
+                    </br>
+                  </div>
+                  <div class="py-20">
+                    <button id="save-button" class="btn btn-wide btn-sm btn-accent"> Song hinzufügen</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="osmdCanvas"></div>
+        </div>
+      </div>
+      <!--Ende Songeintrag Template-->
+
+      <!--Songe-Update Template-->
+      <div id="song-update-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box max-w-full">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Song Update</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <!--Menü-Button-->
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="songs-breadcrumbs">
+                <a>Songs</a>
+              </li>
+              <li id="songinfo-breadcrumbs">
+                <a>Songinformation</a>
+              </li>
+              <li>
+                <a>Song updaten</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="flex p-4 gap-x-4">
+              <div>
+                <!--Eingabefeld Songtitel-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Titel</span>
+                  </label>
+                  <input id="title-input-update" type="text" placeholder="Titel"
+                    class="input input-accent-focus input-bordered text-base-content">
+                </div>
+                <!--Eingabefeld Interpret-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Interpret</span>
+                  </label>
+                  <input id="interpret-input-update" type="text" placeholder="Interpret"
+                    class="input input-accent-focus input-bordered text-base-content">
+                </div>
+                <!--Eingabefeld Genre-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Genre</span>
+                  </label>
+                  <input id="genre-input-update" type="text" placeholder="Jazz"
+                    class="input input-accent-focus input-bordered text-base-content">
+                </div>
+              </div>
+              <div>
+                <!--Eingabefeld Kategorie-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Kategorie</span>
+                  </label>
+                  <input id="category-input-update" type="text" placeholder="Kategorie"
+                    class="input input-accent-focus input-bordered text-base-content">
+                </div>
+                <div>
+                  <!--Dropdown Beats per Minutes-->
+                  <label class="label">
+                    <span class="label-text">BPM</span>
+                  </label>
+                  <select id="bpm-input-update"
+                    class="select select-accent-focus select-bordered w-full max-w-xs text-neutral">
+                    <option disabled="disabled" selected="selected">Wähle Beats per Minute</option>
+                    <option class="font-light">60</option>
+                    <option class="font-light">70</option>
+                    <option class="font-light">80</option>
+                    <option class="font-light">90</option>
+                    <option class="font-light">100</option>
+                    <option class="font-light">110</option>
+                    <option class="font-light">120</option>
+                    <option class="font-light">130</option>
+                    <option class="font-light">140</option>
+                    <option class="font-light">150</option>
+                    <option class="font-light">160</option>
+                    <option class="font-light">170</option>
+                    <option class="font-light">180</option>
+                    <option class="font-light">190</option>
+                    <option class="font-light">200</option>
+                    <option class="font-light">210</option>
+                    <option class="font-light">220</option>
+                    <option class="font-light">230</option>
+                    <option class="font-light">240</option>
+                    <option class="font-light">250</option>
+                    <option class="font-light">260</option>
+                    <option class="font-light">270</option>
+                    <option class="font-light">280</option>
+                    <option class="font-light">290</option>
+                    <option class="font-light">300</option>
+                    <option class="font-light">310</option>
+                    <option class="font-light">320</option>
+                  </select>
+                </div>
+                <!--Eingabefeld Anmerkungen-->
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Anmerkungen</span>
+                  </label>
+                  <textarea id="comment-input-update"
+                    class="textarea textarea-accent-focus textarea-bordered text-base-content"
+                    placeholder="Anmerkungen"></textarea>
+                </div>
+              </div>
+              <div>
+                <!--Datei auswählen-->
+                </br>
+                </br>
+                <div class="form-control px-8">
+                  <!--Song Update Button-->
+                  <form id="upload-form" method="post">
+                    <input class="text-secondary-content" type="file" id="inputFile">
+                  </form>
+                  <div>
+                    </br>
+                    </br>
+                  </div>
+                  <div class="py-20">
+                    <button id="update-btn" class="btn btn-wide btn-sm btn-accent text-accent-content"> Song
+                      updaten</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="osmdCanvasUpdate"></div>
+        </div>
+      </div>
+      <!--Ende Songe-Update Template-->
+
+      <!--Song-löschen-Template-->
+      <div id="song-delete-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box w-auto">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Songs löschen</span>
+            </div>
+            <!--Menü-Button-->
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="songs-breadcrumbs">
+                <a>Songs</a>
+              </li>
+              <li>
+                <a>Songs löschen</a>
+              </li>
+            </ul>
+          </div>
+          <div class="overflow-x-auto py-5">
+            <label class="label">
+              <span class="label-text">Songs zum Löschen auswählen</span>
+            </label>
+            <!--Tabelle aller Songs zum Löschen-->
+            <table class="table w-full text-base-content">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Titel</th>
+                  <th>Interpret</th>
+                  <th>Genre</th>
+                </tr>
+              </thead>
+              <!--Einzelner Songeintrag-->
+              <tbody id="songlist-delete-table" >
+                <template id="delete-song-entry-table" class="px-20">
+                  <tr class="text-base-content" id="delete-song-entry-container-table">
+                    <th>
+                      <label>
+                        <input id="delete-song-checkbox" type="checkbox" class="checkbox">
+                      </label>
+                    </th>
+                    <td id="delete-song-title-table">
+                      <div class="font-bold"></div>
+                    </td>
+                    <td id="delete-song-interpret-table"></td>
+                    <td id="delete-song-genre-table"></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+          <div class="py-20">
+            <!--Songs-löschen-Button-->
+            <button id="delete-songs-button" class="btn btn-wide btn-sm btn-accent"> Songs löschen</button>
+          </div>
+        </div>
+      </div>
+      <!--Ende Song löschen Template-->
+
+      <!--Songinformation-Template-->
+      <div id="songinformation-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box max-w-full">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Songinformation</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <div class="flex items-stretch">
+                <!--Song-Löschen-Button-->
+                <a id="delete-btn-song-detail-info" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                  </svg>
+                </a>
+                <!--Song-abspielen-Button-->
+                <a id="song-play-btn" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                  </svg>
+                </a>
+                <!--Song-bearbeiten-Button-->
+                <a id="song-edit-btn" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                  </svg>
+                </a>
+              </div>
+              <!--Menü-Button-->
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="songs-breadcrumbs">
+                <a>Songs</a>
+              </li>
+              <li>
+                <a>Songinformation</a>
+              </li>
+            </ul>
+          </div>
+          <div class="flex p-4 gap-x-4">
+            <!--Titel-Interpret-Card-->
+            <div class="card-body card shadow-lg bg-accent-content text-accent">
+              <h2 id="title-information" class="card-title ">Titel</h2>
+              <h3 id="interpret-information">Interpret</h3>
+            </div>
+            <!--Songinformationen-Card-->
+            <div class="card-body card shadow-lg bg-accent-content text-accent">
+              <div class="overflow-x-auto bg-accent-content">
+                <table class="table-auto table-compact">
+                  <tbody>
+                    <tr class="bg-accent-content">
+                      <td class="font-semibold">Genre</td>
+                      <td id="genre-information">...</td>
+                    </tr>
+                    <tr class="bg-accent-content">
+                      <td class="font-semibold">Kategorie</td>
+                      <td id="category-information">...</td>
+                    </tr>
+                    <tr class="bg-accent-content">
+                      <td class="font-semibold">BPM</td>
+                      <td id="bpm-information">...</td>
+                    </tr>
+                    <tr class="bg-accent-content">
+                      <td class="font-semibold">Kommentar</td>
+                      <td id="comment-information">...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!--Songtext-Card-->
+          <div id="osmdCanvasDetails"></div>
+        </div>
+      </div>
+      <!--Ende Songinformation-Template-->
+
+      <!--Setlisten-Template-->
+      <div id="setlist-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box w-auto">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Setlisten</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <div class="flex items-stretch">
+                <!--Setliste-löschen-Button-->
+                <a id="delete-setlists-btn-trash-icon" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                  </svg>
+                </a>
+                <!--Setliste-hinzufügen-Button-->
+                <a id="add-setlist-btn-icon" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                  </svg>
+                </a>
+              </div>
+              <!--Menü-Button-->
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="setlists-breadcrumbs">
+                <a>Setlisten</a>
+              </li>
+            </ul>
+          </div>
+          <!--Setlisteneintrag-->
+          <div id="setlist" class="px-20">
+            <template id="setlist-entry" class="px-20">
+              <div id="setlist-container"
+                class="collapse border rounded-box border-secondary-focus bg-secondary-content text-secondary collapse-arrow ">
+                <input type="checkbox">
+                <div id="setlist-title" class="collapse-title text-xl font-medium">Setliste 1</div>
+                <!--Setliste-Info-Button-->
+                <a id="setlist-info-button" class="btn btn-ghost btn-sm rounded-btn float-right">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                  </svg>
+                </a>
+                <div id="setlist-songs" class="collapse-content"></div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+      <!--Ende Setlisten Template-->
+
+      <!-- Setliste-Detail-Template-->
+      <div id="setlist-detail-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box w-auto">
+            <div class="flex-1 px-2 mx-2">
+              <span id="setlist-name" class="text-lg font-bold">...</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <div class="flex items-stretch">
+                <!--Setliste-Löschen-Button-->
+                <a id="delete-setlist-btn-setlist-detail-info" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                  </svg>
+                  <!--Setliste-abspielen-Button-->
+                  <a id="setlist-play-btn" class="btn btn-ghost btn-sm rounded-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                    </svg>
+                  </a>
+                  <!--Setliste-bearbeiten-Button-->
+                  <a id="setlist-edit-btn" class="btn btn-ghost btn-sm rounded-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                    </svg>
+                  </a>
+              </div>
+              <!--Menü-Button-->
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="setlists-breadcrumbs">
+                <a>Setlisten</a>
+              </li>
+              <li>
+                <a id="setlistname-breadcrumb">Setliste 1</a>
+              </li>
+            </ul>
+          </div>
+          <!--Setlisten-Detail-Eintrag-->
+          <div id="setlist-detail" class="px-20">
+          </div>
+          <template id="setlist-entry-detail" class="px-20">
+            <div id="setlist-detail-container"
+              class="collapse border rounded-box border-secondary-focus bg-secondary-content text-secondary collapse-arrow">
+              <input type="checkbox">
+              <div id="song-title-detail" class="collapse-title text-xl font-medium">Song 1</div>
+              <div id="song-detail" class="collapse-content"></div>
+            </div>
+          </template>
+        </div>
+      </div>
+      <!--Ende Setlist-Detail-Template-->
+
+      <!--Setliste-Erstellen-Template-->
+      <div id="create-setlist-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box w-auto">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Setliste erstellen</span>
+            </div>
+            <!--Menü-Button-->
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="setlists-breadcrumbs">
+                <a>Setlisten</a>
+              </li>
+              <li>
+                <a>Setliste erstellen</a>
+              </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Setlistenname</span>
+            </label>
+            <!--Eingabefeld Setlistenname-->
+            <input id="setlist-name-input" type="text" placeholder="Name eingeben"
+              class="input input-primary input-bordered text-base-content">
+          </div>
+          <div class="overflow-x-auto py-5">
+            <label class="label">
+              <span class="label-text">Songs für Setliste auswählen</span>
+            </label>
+            <!--Tabelle aller Songs zum Hinzufügen zur Setliste-->
+            <table class="table w-full bg-base-200 text-base-content">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Titel</th>
+                  <th>Interpret</th>
+                  <th>Genre</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <!--Einzelner Songeintrag-->
+              <tbody id="songlist-table" ">
+                <template id="song-entry-table" class="px-20">
+                  <tr class="text-base-content" id="song-entry-container-table">
+                    <th class="bg-base-100">
+                      <label>
+                        <input id="checkbox" type="checkbox" class="checkbox">
+                      </label>
+                    </th>
+                    <td id="title-table" class="bg-base-100">
+                      <div class="font-bold"></div>
+                    </td>
+                    <td id="interpret-table" ></td>
+                    <td id="genre-table" ></td>
+                    <th>
+                      <!--Song-Detail-Button-->
+                      <button class="btn btn-ghost btn-xs" id="detail-button">details</button>
+                    </th>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+          <div class="py-20">
+            <!--Setliste-erstellen-Button-->
+            <button id="save-setlist-button" class="btn btn-wide btn-sm bg-secondary-content text-secondary">
+              Setliste erstellen</button>
+          </div>
+        </div>
+      </div>
+      <!--Ende Setlisten-Erstellen Template-->
+
+      <!--Setliste-Bearbeiten-Template-->
+      <div id="update-setlist-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box w-auto">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Setliste bearbeiten</span>
+            </div>
+            <!--Menü-Button-->
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="setlists-breadcrumbs">
+                <a>Setlisten</a>
+              </li>
+              <li id="setlistinfo-breadcrumbs">
+                <a>Setlisteninformation</a>
+              </li>
+              <li>
+                <a>Setliste bearbeiten</a>
+              </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Setlistenname</span>
+            </label>
+            <!--Eingabefeld Setlistenname-->
+            <input id="setlist-name-input-update" type="text" placeholder="Name eingeben"
+              class="input input-primary input-bordered text-base-content">
+          </div>
+          <div class="overflow-x-auto py-5">
+            <label class="label">
+              <span class="label-text">Songs für Setliste auswählen</span>
+            </label>
+            <!--Tabelle aller Songs zum Hinzufügen zur Setliste-->
+            <table class="table w-full text-base-content">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Titel</th>
+                  <th>Interpret</th>
+                  <th>Genre</th>
+                </tr>
+              </thead>
+              <!--Einzelner Songeintrag-->
+              <tbody id="update-setlist-table">
+                <template id="update-song-setlist-template" class="update-setlist px-20">
+                  <tr class="text-base-content" id="update-setlist-container-table">
+                    <th>
+                      <label>
+                        <input id="update-checkbox" type="checkbox" class="checkbox">
+                      </label>
+                    </th>
+                    <td id="update-title-table">
+                      <div class="font-bold"></div>
+                    </td>
+                    <td id="update-interpret-table"></td>
+                    <td id="update-genre-table"></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+          <div class="py-20">
+            <!--Setliste-bearbeiten-Button-->
+            <button id="save-setlist-button-update"
+              class="btn btn-wide btn-sm bg-secondary-content text-secondary"> Setliste updaten</button>
+          </div>
+        </div>
+      </div>
+      <!--Ende Setlisten-bearbeiten Template-->
+
+      <!--Setliste-löschen-Template-->
+      <div id="delete-setlist-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box w-auto">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Setliste löschen</span>
+            </div>
+            <!--Menü-Button-->
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="setlists-breadcrumbs">
+                <a>Setlisten</a>
+              </li>
+              <li>
+                <a>Setliste löschen</a>
+              </li>
+            </ul>
+          </div>
+          <div class="overflow-x-auto py-5">
+            <label class="label">
+              <span class="label-text">Setliste zum löschen auswählen</span>
+            </label>
+            <!--Tabelle aller Setlisten-->
+            <table class="table w-full text-base-content">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Titel</th>
+                </tr>
+              </thead>
+              <!--Einzelne SEtliste-->
+              <tbody id="delete-setlist-table">
+                <template id="setlist-delete-table" class="px-20">
+                  <tr class="text-base-content" id="delete-setlist-container-table">
+                    <th>
+                      <label>
+                        <input id="delete-setlist-checkbox" type="checkbox" class="checkbox">
+                      </label>
+                    </th>
+                    <td id="delete-setlist-title-table">
+                      <div class="font-bold"></div>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+          <div class="py-20">
+            <!--Setliste-löschen-Button-->
+            <button id="delete-setlist-button" class="btn btn-wide btn-sm bg-secondary-content text-secondary">
+              Setliste löschen</button>
+          </div>
+        </div>
+      </div>
+      <!--Ende Setlisten-löschen Template-->
+
+      <!-- Einstellungen-Template-->
+      <div id="property-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box max-w-full">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Einstellungen</span>
+            </div>
+            <!--Menü-Button-->
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+              <div class="flex flex-col items-start drawer-content ">
+                <label for="my-drawer-2" class="btn btn-ghost btn-sm rounded-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block w-6 h-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li>
+                <a>Einstellungen</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <label class="label">
+              <span class=" text-lg text-base-content">Wähle ein Theme</span>
+            </label>
+            <select id="theme-input"
+              class="select select-primary select-bordered w-full max-w-xs text-base-content">
+              <option disabled="disabled" selected="selected">garden</option>
+              <option class="font-light">garden</option>
+              <option class="font-light">light</option>
+              <option class="font-light">cupcake</option>
+              <option class="font-light">bumblebee</option>
+              <option class="font-light">emerald</option>
+              <option class="font-light">retro</option>
+              <option class="font-light">valentine</option>
+              <option class="font-light">pastel</option>
+              <option class="font-light">fantasy</option>
+              <option class="font-light">wireframe</option>
+            </select>
+          </div>
+
+          <ul class="p-4 overflow-y-auto w-45 bg-base-200 text-base-content ">
+            <li>
+              <a>
+                <div class="flex">
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                      class="bi bi-wifi-off" viewBox="0 0 16 16">
+                      <path
+                        d="M10.706 3.294A12.545 12.545 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c.63 0 1.249.05 1.852.148l.854-.854zM8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065 8.448 8.448 0 0 1 3.51-1.27L8 6zm2.596 1.404.785-.785c.63.24 1.227.545 1.785.907a.482.482 0 0 1 .063.745.525.525 0 0 1-.652.065 8.462 8.462 0 0 0-1.98-.932zM8 10l.933-.933a6.455 6.455 0 0 1 2.013.637c.285.145.326.524.1.75l-.015.015a.532.532 0 0 1-.611.09A5.478 5.478 0 0 0 8 10zm4.905-4.905.747-.747c.59.3 1.153.645 1.685 1.03a.485.485 0 0 1 .047.737.518.518 0 0 1-.668.05 11.493 11.493 0 0 0-1.811-1.07zM9.02 11.78c.238.14.236.464.04.66l-.707.706a.5.5 0 0 1-.707 0l-.707-.707c-.195-.195-.197-.518.04-.66A1.99 1.99 0 0 1 8 11.5c.374 0 .723.102 1.021.28zm4.355-9.905a.53.53 0 0 1 .75.75l-10.75 10.75a.53.53 0 0 1-.75-.75l10.75-10.75z" />
+                    </svg>
+                  </div>
+                  <div class="text-lg">&nbsp;Offline Modus</div>
+                </div>
+              </a>
+
+            </li>
+            <li>
+              <div class="font-light ">Die Anwendung ist auch ohne Internetverbindung nutzbar. Alle Funktionen stehen im Offline-Modus zur Verfügung. 
+                 Wird ein Song oder eine Setliste hinzugefügt, gelöscht oder bearbeitet wird dies gespeichert und bei einer erneuten Verknüpfung mit dem Internet aktualisiert. </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+      <!--Einstellungen-Template-->
+
+      <!--Song-abspielen-Template-->
+      <div id="play-song-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box max-w-full">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Song Abspielen</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <div class="flex items-stretch"></div>
+              <!--Song-abspielen-Button-->
+              <a id="play-current-song-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                </svg>
+              </a>
+              <!--Song-pausieren-Button-->
+              <a id="pause-current-song-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-pause-circle-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5zm3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5z" />
+                </svg>
+              </a>
+              <!--Song-stop-Button-->
+              <a id="stop-current-song-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-stop-circle-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="songs-breadcrumbs">
+                <a>Songs</a>
+              </li>
+              <li id="songinfo-breadcrumbs">
+                <a>Songinformation</a>
+              </li>
+              <li>
+                <a>Song abspielen</a>
+              </li>
+            </ul>
+          </div>
+          <div id="osmdCanvasPlay-start"></div>
+          <div id="scrollable-div" style="height:600px" class="overflow-y-auto">
+            <div id="osmdCanvasPlay"></div>
+          </div>
+          <div id="osmdCanvasPlay-stop"></div>
+        </div>
+      </div>
+      <!--Song-abspielen-Template-->
+
+      <!--Setliste-abspielen-Template-->
+      <div id="play-setlist-template" class="place-self-stretch" style="display: none">
+        <div class="px-8 pt-4">
+          <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box max-w-full">
+            <div class="flex-1 px-2 mx-2">
+              <span class="text-lg font-bold">Setliste Abspielen</span>
+            </div>
+            <div class="flex-none hidden px-2 mx-2 lg:flex">
+              <div class="flex items-stretch"></div>
+              <!--Setlist-abspielen-Button-->
+              <a id="play-current-setlist-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                </svg>
+              </a>
+              <!--Setlist-Skip-Links-Button-->
+              <a id="skip-left-current-setlist-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-skip-start-circle-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM9.71 5.093 7 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407v-5a.5.5 0 0 0-.79-.407z" />
+                </svg>
+              </a>
+              <!--Setlist-pausieren-Button-->
+              <a id="pause-current-setlist-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-pause-circle-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5zm3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5z" />
+                </svg>
+              </a>
+              <!--Setlist-Skip-Rechts-Button-->
+              <a id="skip-right-current-setlist-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-skip-end-circle-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407L9.5 8.972V10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v1.528L6.79 5.093z" />
+                </svg>
+              </a>
+              <!--Setlist-stop-Button-->
+              <a id="stop-current-setlist-btn" class="btn btn-ghost btn-sm rounded-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-stop-circle-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="text-sm breadcrumbs text-base-content pl-4">
+            <ul>
+              <li id="setlists-breadcrumbs">
+                <a>Setlisten</a>
+              </li>
+              <li id="setlistinfo-breadcrumbs">
+                <a>Setlisteninformation</a>
+              </li>
+              <li>
+                <a>Setliste abspielen</a>
+              </li>
+            </ul>
+          </div>
+          <!--Div in dem die Songliste + Abspielbereich angezeigt werden-->
+          <div class="grid grid-cols-4 gap-4">
+            <div class="overflow-x-auto col-span-1">
+              <table id="songs-to-play-table" class="table w-full bg-base-200 text-base-content">
+                <tbody id="songs-to-play">
+                </tbody>
+                <template id="song-to-play-template">
+                  <tr id="song-to-play-container-table" class="active">
+                    <td id="song-to-play-rank"></td>
+                    <td id="song-to-play-title"></td>
+                  </tr>
+                </template>
+              </table>
+            </div>
+            <!-- div für das Scrollen der Lyrics-->
+            <div id="scrollable-setlist-play-div" style="height:600px" class="overflow-y-auto col-span-3">
+              <div id="info-play-setlist" class="text-neutral-focus" style="display: block">Drücke den Playbutton, um
+                die Playliste zustarten</div>
+              <div id="osmdCanvasSetlistPlay"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--Setliste-abspielen-Template-->
+    </div>
+
+    <!--Menü-->
+    <div class="drawer-side">
+      <label for="my-drawer-2" class="drawer-overlay"></label>
+      <ul class="menu p-4 overflow-y-auto w-45 bg-base-100 text-base-content  ">
+        <li id="song-menu">
+          <a>
+            <!--Songs-->
+            <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-music-note" viewBox="0 0 16 16">
+                <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z" />
+                <path fill-rule="evenodd" d="M9 3v10H8V3h1z" />
+                <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z" />
+              </svg></div>
+            <div>&nbsp;Songs</div>
+          </a>
+        </li>
+        <li id="setlist-menu">
+          <a>
+            <!--Setlisten-->
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-music-note-list" viewBox="0 0 16 16">
+                <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z" />
+                <path fill-rule="evenodd" d="M12 3v10h-1V3h1z" />
+                <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z" />
+                <path fill-rule="evenodd"
+                  d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z" />
+              </svg>
+            </div>
+            <div>&nbsp;Setlisten</div>
+          </a>
+        </li>
+        <li id="property-menu">
+          <!--Einstellungen-->
+          <a>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                <path
+                  d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+              </svg>
+            </div>
+            <div>&nbsp;Einstellungen</div>
+          </a>
+        </li>
+        <li>
+          <label for="my-drawer-2" class="menu w-45 bg-base-100 btn btn-ghost  ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+              <path
+                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+            </svg>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script type="module" src="resources/js/index.js"></script>
+  <script src="resources/OpenSheetMusicDisplay/opensheetmusicdisplay.min.js"></script>
+  <script src="resources/js/app.js"></script>
+</body>
+
+</html>
